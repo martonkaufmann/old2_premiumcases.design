@@ -4,4 +4,23 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
+exports.createPages = async ({ actions, graphql }) => {
+    const { data } = await graphql(`
+        query {
+            hasura {
+                cases {
+                    id
+                    name
+                }
+            }
+        }
+    `);
+
+    for (const c of data.hasura.cases) {
+        actions.createPage({
+            path: `/case/${c.name}`,
+            component: require.resolve(`./src/templates/case.tsx`),
+            context: { id: c.id },
+        });
+    }
+};
