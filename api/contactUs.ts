@@ -42,14 +42,14 @@ const sendContactUsEmail = async (
         },
     });
 
-    await transporter.sendMail({
+    transporter.sendMail({
         from: process.env.SMTP_USER,
         to: process.env.SMTP_USER,
         replyTo: replyTo,
         subject: 'Contact us - ' + subject,
         text: message,
         html: message,
-    });
+    }, () => {});
 };
 
 const isHCaptchaTokenValid = async (token: string): Promise<boolean> => {
@@ -63,6 +63,10 @@ const isHCaptchaTokenValid = async (token: string): Promise<boolean> => {
 };
 
 export default async (request: NowRequest, response: NowResponse) => {
+    if (!request.body) {
+        response.status(400).send({});
+    }
+
     const isTokenValid = await isHCaptchaTokenValid(request.body.token);
 
     if (!isTokenValid) {
