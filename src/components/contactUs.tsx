@@ -76,6 +76,7 @@ const ContactUs: React.FC = (): ReactElement => {
                 ref={messageInput}
             ></textarea>
             <HCaptcha
+                id="contact-us-hcaptcha"
                 sitekey={process.env.GATSBY_HCAPTCHA_SITE_KEY}
                 onVerify={setHCaptchaToken}
             />
