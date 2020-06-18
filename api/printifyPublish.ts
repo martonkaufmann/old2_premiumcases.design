@@ -142,50 +142,63 @@ export default async (request: NowRequest, response: NowResponse) => {
 
     const promises: Promise<any>[] = [];
 
-    const productId: string = request.body.resource.id;
-    const shopId: number = request.body.resource.data.shop_id;
+    const printifyProductId: string = request.body.resource.id;
+    const printifyShopId: number = request.body.resource.data.shop_id;
     const printifyGetProductResponse = await printifyGetProduct(
-        shopId,
-        productId,
+        printifyShopId,
+        printifyProductId,
     );
-    const productArtworkId: string =
+    const printifyProductArtworkId: string =
         printifyGetProductResponse.data.print_areas[0].placeholders[0].images[0]
             .id;
     const printifyGetArtworkResponse = await pritifyGetArtwork(
-        productArtworkId,
+        printifyProductArtworkId,
+    );
+    const cloudinaryProductArtworkPublicId = generateCloudinaryPublicId(
+        printifyGetArtworkResponse.data.preview_url,
     );
 
     const hasuraSaveCaseResponse = await hasuraSaveCase(
         printifyGetProductResponse.data.title,
         printifyGetProductResponse.data.variants[0].price,
-        productArtworkId,
+        cloudinaryProductArtworkPublicId,
     );
-    const caseId: number = hasuraSaveCaseResponse.data.data.insert_cases_one.id;
+    const hasuraCaseId: number =
+        hasuraSaveCaseResponse.data.data.insert_cases_one.id;
 
     promises.push(
         cloudinaryUploadImage(
             printifyGetArtworkResponse.data.preview_url,
-            generateCloudinaryPublicId(
-                printifyGetArtworkResponse.data.preview_url,
-            ),
+            cloudinaryProductArtworkPublicId,
         ),
     );
 
-    for (const [deviceId, printifyDeviceId] of DEVICE_MAP) {
+    for (const [hasuraDeviceId, printifyDeviceId] of DEVICE_MAP) {
         for (const variant of printifyGetProductResponse.data.variants) {
             if (
                 variant.options.includes(printifyDeviceId) &&
                 variant.options.includes(PRINTIFY_SURFACE_GLOSSY)
             ) {
-                const image = printifyGetProductResponse.data.images.find(
+                const printifyVariantImage = printifyGetProductResponse.data.images.find(
                     image => image.variant_ids.includes(variant.id),
                 );
-                const imagePublicId = generateCloudinaryPublicId(image.src);
-
-                promises.push(cloudinaryUploadImage(image.src, imagePublicId));
+                const cloudinaryVariantImagePublicId = generateCloudinaryPublicId(
+                    printifyVariantImage.src,
+                );
 
                 promises.push(
-                    hasuraSaveCaseDevice(deviceId, caseId, imagePublicId),
+                    cloudinaryUploadImage(
+                        printifyVariantImage.src,
+                        cloudinaryVariantImagePublicId,
+                    ),
+                );
+
+                promises.push(
+                    hasuraSaveCaseDevice(
+                        hasuraDeviceId,
+                        hasuraCaseId,
+                        cloudinaryVariantImagePublicId,
+                    ),
                 );
             }
         }
@@ -193,7 +206,7 @@ export default async (request: NowRequest, response: NowResponse) => {
 
     await Promise.all(promises);
 
-    await printifyProductPublishSuccess(shopId, productId);
+    await printifyProductPublishSuccess(printifyShopId, printifyProductId);
 
     console.log('Case saved and product published');
 
