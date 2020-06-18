@@ -32,7 +32,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
         cloud_name: process.env.GATSBY_CLOUDINARY_NAME,
     });
 
-    const headerImageSource = cloudinary.url('index-header', {
+    const headerImageSource = cloudinary.url('assets/index-header', {
         quality: 'auto',
         fetchFormat: 'auto',
         secure: true,
@@ -114,7 +114,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
             <section className="mt-20 mx-0 xl:mx-40 xl:flex xl:flex-row px-4 xl:px-0">
                 <Image
                     cloudName={process.env.GATSBY_CLOUDINARY_NAME}
-                    publicId="index-about"
+                    publicId="assets/index-about"
                     secure="true"
                     dpr="auto"
                     responsive
