@@ -80,7 +80,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                 <header className="text-2xl text-center mb-16">
                     Latest designs
                 </header>
-                <div className="grid grid-cols-5 grid-flow-row">
+                <div className="grid grid-cols-8 grid-flow-row">
                     {data.hasura.cases.map(c => (
                         <Link
                             to={`/case/${c.name}`}
@@ -159,7 +159,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                 <header className="text-2xl w-full xl:w-64 flex-shrink-0 border-b pb-4 xl:pb-0 xl:border-b-0 xl:border-r text-center xl:mt-6 mb-16 xl:mb-0">
                     Catalog
                 </header>
-                <section className="grid grid-cols-3 row-gap-4">
+                <section className="grid grid-cols-2 lg:grid-cols-4 row-gap-4">
                     {data.hasura.devices_by_pk.cases_devices.map(caseDevice => (
                         <Link
                             to={`/case/${caseDevice.case.name}`}
@@ -188,12 +188,12 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                                     />
                                 </Image>
                             </LazyLoad>
-                            <span className="px-6 break-words block underline hidden lg:block">
+                            <span className="px-6 break-words block underline">
                                 {caseDevice.case.name}
                             </span>
                         </Link>
                     ))}
-                    <div className="col-span-3 flex justify-center mt-16">
+                    <div className="lg:col-span-4 flex justify-center mt-16">
                         <Link
                             to="/cases"
                             className="text-white bg-black px-6 py-4 flex items-center"
@@ -213,14 +213,14 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
 export const query = graphql`
     query {
         hasura {
-            cases(limit: 20) {
+            cases(limit: 24) {
                 id
                 name
                 artwork
             }
 
             devices_by_pk(id: 2) {
-                cases_devices(offset: 20, limit: 12) {
+                cases_devices(offset: 20, limit: 16) {
                     image
                     case {
                         id
