@@ -1,7 +1,6 @@
 import React from 'react';
 import { PageProps, Link, graphql } from 'gatsby';
 import { Image, Transformation } from 'cloudinary-react';
-import LazyLoad from 'react-lazyload';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
@@ -35,26 +34,21 @@ const CasesPage: React.FC<PageProps<DataProps>> = ({
                         to={`/case/${caseDevice.case.name}`}
                         key={`case-${caseDevice.case.id}`}
                     >
-                        <LazyLoad height={300}>
-                            <Image
-                                cloudName={process.env.GATSBY_CLOUDINARY_NAME}
-                                publicId={caseDevice.image}
-                                secure="true"
-                                dpr="auto"
-                                responsive
-                                className="mx-auto"
-                            >
-                                <Transformation
-                                    quality="auto"
-                                    fetchFormat="auto"
-                                />
-                                <Transformation
-                                    width="800"
-                                    height="800"
-                                    crop="fill"
-                                />
-                            </Image>
-                        </LazyLoad>
+                        <Image
+                            cloudName={process.env.GATSBY_CLOUDINARY_NAME}
+                            publicId={caseDevice.image}
+                            secure="true"
+                            dpr="auto"
+                            responsive
+                            className="mx-auto"
+                        >
+                            <Transformation quality="auto" fetchFormat="auto" />
+                            <Transformation
+                                width="800"
+                                height="800"
+                                crop="fill"
+                            />
+                        </Image>
                         <span className="px-6 break-words block underline">
                             {caseDevice.case.name}
                         </span>
