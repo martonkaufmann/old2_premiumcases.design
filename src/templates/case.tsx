@@ -58,7 +58,10 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
 
     return (
         <Layout>
-            <SEO title={data.hasura.cases_by_pk.name} />
+            <SEO title={data.hasura.cases_by_pk.name} meta={[{
+                name: `twitter:image`,
+                content: caseImageSource,
+            }]} />
             <section className="flex flex-col lg:flex-row xl:mx-40 px-4 xl:px-0">
                 <section className="w-full">
                     <img src={caseImageSource} />
@@ -99,7 +102,7 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
                                             device.id === selectedDeviceId
                                                 ? 'text-black bg-white'
                                                 : 'text-white bg-black'
-                                        } transition-colors duration-100 hover:bg-white hover:text-black`}
+                                            } transition-colors duration-100 hover:bg-white hover:text-black`}
                                     >
                                         {device.name}
                                     </button>
