@@ -2,6 +2,7 @@ import React from 'react';
 import { PageProps, Link, graphql } from 'gatsby';
 import { Image, Transformation } from 'cloudinary-react';
 import { Cloudinary } from 'cloudinary-core';
+import LazyLoad from 'react-lazyload';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
@@ -79,31 +80,36 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                 <header className="text-2xl text-center mb-16">
                     Latest designs
                 </header>
-                <div className="grid grid-cols-5 grid-flow-row">
+                <div className="grid grid-cols-8 grid-flow-row">
                     {data.hasura.cases.map(c => (
                         <Link
                             to={`/case/${c.name}`}
                             className="block overflow-hidden relative group"
                             key={`artwork-${c.id}`}
                         >
-                            <Image
-                                cloudName={process.env.GATSBY_CLOUDINARY_NAME}
-                                publicId={c.artwork}
-                                secure="true"
-                                dpr="auto"
-                                responsive
-                                className="transition-transform duration-200 transform scale-100 group-hover:scale-110"
-                            >
-                                <Transformation
-                                    quality="auto"
-                                    fetchFormat="auto"
-                                />
-                                <Transformation
-                                    width="400"
-                                    height="400"
-                                    crop="fill"
-                                />
-                            </Image>
+                            <LazyLoad height={400}>
+                                <Image
+                                    cloudName={
+                                        process.env.GATSBY_CLOUDINARY_NAME
+                                    }
+                                    publicId={c.artwork}
+                                    secure="true"
+                                    dpr="auto"
+                                    responsive
+                                    className="transition-transform duration-200 transform scale-100 group-hover:scale-110"
+                                    alt={c.name}
+                                >
+                                    <Transformation
+                                        quality="auto"
+                                        fetchFormat="auto"
+                                    />
+                                    <Transformation
+                                        width="400"
+                                        height="400"
+                                        crop="fill"
+                                    />
+                                </Image>
+                            </LazyLoad>
                             <div className="flex justify-center items-center text-center p-4 bg-gray-800 bg-opacity-75 text-white absolute inset-0 transition-opacity duration-200 opacity-0 group-hover:opacity-100">
                                 {c.name}
                             </div>
@@ -112,17 +118,20 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                 </div>
             </section>
             <section className="mt-20 mx-0 xl:mx-40 xl:flex xl:flex-row px-4 xl:px-0">
-                <Image
-                    cloudName={process.env.GATSBY_CLOUDINARY_NAME}
-                    publicId="assets/index-about"
-                    secure="true"
-                    dpr="auto"
-                    responsive
-                    className="mx-auto"
-                >
-                    <Transformation quality="auto" fetchFormat="auto" />
-                    <Transformation width="600" height="600" crop="fill" />
-                </Image>
+                <LazyLoad height={600}>
+                    <Image
+                        cloudName={process.env.GATSBY_CLOUDINARY_NAME}
+                        publicId="assets/index-about"
+                        secure="true"
+                        dpr="auto"
+                        responsive
+                        className="mx-auto"
+                        alt="About our cases"
+                    >
+                        <Transformation quality="auto" fetchFormat="auto" />
+                        <Transformation width="600" height="600" crop="fill" />
+                    </Image>
+                </LazyLoad>
                 <article className="ml-0 xl:ml-24 mt-12 xl:mt-0 flex-1 text-center">
                     <header className="text-2xl mb-16">About our cases</header>
                     <section className="mb-12 text-lg">
@@ -150,38 +159,43 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                 <header className="text-2xl w-full xl:w-64 flex-shrink-0 border-b pb-4 xl:pb-0 xl:border-b-0 xl:border-r text-center xl:mt-6 mb-16 xl:mb-0">
                     Catalog
                 </header>
-                <section className="grid grid-cols-3 row-gap-4">
+                <section className="grid grid-cols-2 lg:grid-cols-4 row-gap-4">
                     {data.hasura.devices_by_pk.cases_devices.map(caseDevice => (
                         <Link
                             to={`/case/${caseDevice.case.name}`}
                             key={`case-${caseDevice.case.id}`}
                         >
-                            <Image
-                                cloudName={process.env.GATSBY_CLOUDINARY_NAME}
-                                publicId={caseDevice.image}
-                                secure="true"
-                                dpr="auto"
-                                responsive
-                                className="mx-auto"
-                            >
-                                <Transformation
-                                    quality="auto"
-                                    fetchFormat="auto"
-                                />
-                                <Transformation
-                                    width="800"
-                                    height="800"
-                                    crop="fill"
-                                />
-                            </Image>
-                            <span className="px-6 break-words block underline hidden lg:block">
+                            <LazyLoad height={800}>
+                                <Image
+                                    cloudName={
+                                        process.env.GATSBY_CLOUDINARY_NAME
+                                    }
+                                    publicId={caseDevice.image}
+                                    secure="true"
+                                    dpr="auto"
+                                    responsive
+                                    className="mx-auto"
+                                    alt={caseDevice.case.name}
+                                >
+                                    <Transformation
+                                        quality="auto"
+                                        fetchFormat="auto"
+                                    />
+                                    <Transformation
+                                        width="800"
+                                        height="800"
+                                        crop="fill"
+                                    />
+                                </Image>
+                            </LazyLoad>
+                            <span className="px-6 break-words block underline">
                                 {caseDevice.case.name}
                             </span>
                         </Link>
                     ))}
-                    <div className="col-span-3 flex justify-center mt-16">
+                    <div className="lg:col-span-4 flex justify-center mt-16">
                         <Link
-                            to="#"
+                            to="/cases"
                             className="text-white bg-black px-6 py-4 flex items-center"
                         >
                             Show more{' '}
@@ -199,14 +213,14 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
 export const query = graphql`
     query {
         hasura {
-            cases(limit: 20) {
+            cases(limit: 24) {
                 id
                 name
                 artwork
             }
 
             devices_by_pk(id: 2) {
-                cases_devices(offset: 20, limit: 12) {
+                cases_devices(offset: 20, limit: 16) {
                     image
                     case {
                         id

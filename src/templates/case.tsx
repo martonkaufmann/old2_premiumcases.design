@@ -34,7 +34,6 @@ type DataProps = {
 };
 
 const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
-    console.log(data);
     const cloudinary = new Cloudinary({
         cloud_name: process.env.GATSBY_CLOUDINARY_NAME,
     });
@@ -128,11 +127,12 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
                 <header className="text-2xl w-full border-b pb-4 text-center mb-16">
                     Latest designs
                 </header>
-                <section className="grid grid-cols-4 row-gap-4">
+                <section className="flex overflow-auto lg:grid lg:grid-cols-4 lg:row-gap-4">
                     {data.hasura.devices_by_pk.cases_devices.map(caseDevice => (
                         <Link
                             to={`/case/${caseDevice.case.name}`}
                             key={`case-${caseDevice.case.id}`}
+                            className="w-64 lg:w-auto flex-shrink-0"
                         >
                             <Image
                                 cloudName={process.env.GATSBY_CLOUDINARY_NAME}
@@ -152,7 +152,7 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
                                     crop="fill"
                                 />
                             </Image>
-                            <span className="px-6 break-words block underline hidden lg:block">
+                            <span className="px-6 break-words block underline text-sm">
                                 {caseDevice.case.name}
                             </span>
                         </Link>

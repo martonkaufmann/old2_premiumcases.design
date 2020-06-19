@@ -40,6 +40,7 @@ const Footer: React.FC = (): ReactElement => (
                             <a
                                 href="https://twitter.com/cases_design"
                                 target="_blank"
+                                rel="noreferrer"
                             >
                                 Twitter
                             </a>
@@ -48,6 +49,7 @@ const Footer: React.FC = (): ReactElement => (
                             <a
                                 href="https://www.pinterest.com/account1228/"
                                 target="_blank"
+                                rel="noreferrer"
                             >
                                 Pinterest
                             </a>
@@ -56,6 +58,7 @@ const Footer: React.FC = (): ReactElement => (
                             <a
                                 href="https://www.instagram.com/premiumcases.design/"
                                 target="_blank"
+                                rel="noreferrer"
                             >
                                 Instagram
                             </a>
@@ -72,6 +75,7 @@ const Footer: React.FC = (): ReactElement => (
             <a
                 target="_blank"
                 href="https://www.gatsbyjs.org/"
+                rel="noreferrer"
                 className="underline"
             >
                 Gastby
