@@ -34,7 +34,6 @@ type DataProps = {
 };
 
 const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
-    console.log(data);
     const cloudinary = new Cloudinary({
         cloud_name: process.env.GATSBY_CLOUDINARY_NAME,
     });

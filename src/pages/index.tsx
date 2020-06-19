@@ -97,6 +97,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                                     dpr="auto"
                                     responsive
                                     className="transition-transform duration-200 transform scale-100 group-hover:scale-110"
+                                    alt={c.name}
                                 >
                                     <Transformation
                                         quality="auto"
@@ -125,6 +126,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                         dpr="auto"
                         responsive
                         className="mx-auto"
+                        alt="About our cases"
                     >
                         <Transformation quality="auto" fetchFormat="auto" />
                         <Transformation width="600" height="600" crop="fill" />
@@ -173,6 +175,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                                     dpr="auto"
                                     responsive
                                     className="mx-auto"
+                                    alt={caseDevice.case.name}
                                 >
                                     <Transformation
                                         quality="auto"
