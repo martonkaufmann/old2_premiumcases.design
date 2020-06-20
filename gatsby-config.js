@@ -1,6 +1,6 @@
 module.exports = {
     siteMetadata: {
-        title: `Premium Cases|Design`,
+        title: `Premium Cases | Design`,
         description: `Keep your phone secure & stylish whether headed to the office or wrapped in pastels for a spring time soirée.`,
         author: `PremiumCases|Design`,
     },
@@ -20,10 +20,10 @@ module.exports = {
                 name: `gatsby-starter-default`,
                 short_name: `starter`,
                 start_url: `/`,
-                background_color: `#663399`,
-                theme_color: `#663399`,
+                background_color: `#fc8181`,
+                theme_color: `#fc8181`,
                 display: `minimal-ui`,
-                icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+                icon: `src/images/logo.png`, // This path is relative to the root of the site.
             },
         },
         {

@@ -75,7 +75,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                     office or wrapped in pastels for a spring time soirée.
                 </header>
             </section>
-            <section className="mt-20">
+            <section className="mt-40">
                 <header className="text-2xl text-center mb-16">
                     Latest designs
                 </header>
@@ -112,7 +112,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                     ))}
                 </div>
             </section>
-            <section className="mt-20 mx-0 xl:mx-40 xl:flex xl:flex-row px-4 xl:px-0">
+            <section className="mt-40 mx-0 xl:mx-40 xl:flex xl:flex-row px-4 xl:px-0">
                 <Image
                     cloudName={process.env.GATSBY_CLOUDINARY_NAME}
                     publicId="assets/index-about"
@@ -148,7 +148,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                     </ol>
                 </article>
             </section>
-            <section className="mt-20 mb-20 xl:mx-40 xl:flex xl:flex-row">
+            <section className="mt-40 xl:mx-40 xl:flex xl:flex-row">
                 <header className="text-2xl w-full xl:w-64 flex-shrink-0 border-b pb-4 xl:pb-0 xl:border-b-0 xl:border-r text-center xl:mt-6 mb-16 xl:mb-0">
                     Catalog
                 </header>

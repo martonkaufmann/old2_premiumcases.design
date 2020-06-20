@@ -24,7 +24,7 @@ const CatalogPage: React.FC<PageProps<DataProps>> = ({
 }): React.ReactElement => (
     <Layout>
         <SEO title="Catalog" />
-        <section className="mx-0 xl:mx-40 px-4 xl:px-0 mb-20">
+        <section className="mx-0 xl:mx-40 px-4 xl:px-0">
             <header className="text-2xl border-b mb-16 mt-40 text-center">
                 Catalog
             </header>
