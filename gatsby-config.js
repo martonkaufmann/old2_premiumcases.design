@@ -1,6 +1,6 @@
 module.exports = {
     siteMetadata: {
-        title: `Premium Cases|Design`,
+        title: `Premium Cases | Design`,
         description: `Keep your phone secure & stylish whether headed to the office or wrapped in pastels for a spring time soirée.`,
         author: `PremiumCases|Design`,
     },

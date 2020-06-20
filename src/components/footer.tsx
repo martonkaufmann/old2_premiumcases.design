@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import ContactUs from './contactUs';
 
 const Footer: React.FC = (): ReactElement => (
-    <footer className="bg-black px-4 xl:px-0">
+    <footer className="bg-black px-4 xl:px-0 mt-20">
         <section className="flex flex-col lg:flex-row xl:mx-40 py-8 border-b border-white">
             <ul className="text-white flex-1 flex mb-8 lg:mb-0 w-full">
                 <li className="mr-8">

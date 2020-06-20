@@ -148,7 +148,7 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
                     </ol>
                 </article>
             </section>
-            <section className="mt-40 mb-20 xl:mx-40 xl:flex xl:flex-row">
+            <section className="mt-40 xl:mx-40 xl:flex xl:flex-row">
                 <header className="text-2xl w-full xl:w-64 flex-shrink-0 border-b pb-4 xl:pb-0 xl:border-b-0 xl:border-r text-center xl:mt-6 mb-16 xl:mb-0">
                     Catalog
                 </header>

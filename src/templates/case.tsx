@@ -135,7 +135,7 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
                     </button>
                 </aside>
             </section>
-            <section className="mt-20 mb-20 xl:mx-40">
+            <section className="mt-20 xl:mx-40">
                 <header className="text-2xl w-full border-b pb-4 text-center mb-16">
                     Latest designs
                 </header>
