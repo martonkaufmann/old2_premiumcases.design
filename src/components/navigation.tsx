@@ -30,7 +30,7 @@ const Navigation: React.FC = (): ReactElement => {
                         <Link to="#">About our cases</Link>
                     </li>
                     <li className="my-4">
-                        <Link to="#">Catalog</Link>
+                        <Link to="/catalog">Catalog</Link>
                     </li>
                     <li className="my-4">
                         <Link to="#">Social</Link>

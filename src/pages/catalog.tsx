@@ -19,11 +19,11 @@ type DataProps = {
     };
 };
 
-const CasesPage: React.FC<PageProps<DataProps>> = ({
+const CatalogPage: React.FC<PageProps<DataProps>> = ({
     data,
 }): React.ReactElement => (
     <Layout>
-        <SEO title="Home" />
+        <SEO title="Catalog" />
         <section className="mx-0 xl:mx-40 px-4 xl:px-0 mb-20">
             <header className="text-2xl border-b mb-16 mt-40 text-center">
                 Catalog
@@ -75,4 +75,4 @@ export const query = graphql`
     }
 `;
 
-export default CasesPage;
+export default CatalogPage;
