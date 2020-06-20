@@ -62,8 +62,12 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
                 title={data.hasura.cases_by_pk.name}
                 meta={[
                     {
-                        name: `twitter:image`,
+                        name: 'twitter:image',
                         content: caseImageSource,
+                    },
+                    {
+                        name: 'og:type',
+                        content: 'product',
                     },
                 ]}
             />
