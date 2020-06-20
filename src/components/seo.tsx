@@ -65,10 +65,6 @@ const SEO: React.FC<DataProps> = ({
                     content: 'website',
                 },
                 {
-                    property: 'og:url',
-                    content: window.location.href,
-                },
-                {
                     property: 'og:site_name',
                     content: siteMetadata.title,
                 },
