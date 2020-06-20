@@ -58,7 +58,19 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
 
     return (
         <Layout>
-            <SEO title={data.hasura.cases_by_pk.name} />
+            <SEO
+                title={data.hasura.cases_by_pk.name}
+                meta={[
+                    {
+                        name: 'twitter:image',
+                        content: caseImageSource,
+                    },
+                    {
+                        name: 'og:type',
+                        content: 'product',
+                    },
+                ]}
+            />
             <section className="flex flex-col lg:flex-row xl:mx-40 px-4 xl:px-0">
                 <section className="w-full">
                     <img src={caseImageSource} />

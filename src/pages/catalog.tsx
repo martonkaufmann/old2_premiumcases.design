@@ -1,7 +1,6 @@
 import React from 'react';
 import { PageProps, Link, graphql } from 'gatsby';
 import { Image, Transformation } from 'cloudinary-react';
-import LazyLoad from 'react-lazyload';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
@@ -20,11 +19,11 @@ type DataProps = {
     };
 };
 
-const CasesPage: React.FC<PageProps<DataProps>> = ({
+const CatalogPage: React.FC<PageProps<DataProps>> = ({
     data,
 }): React.ReactElement => (
     <Layout>
-        <SEO title="Home" />
+        <SEO title="Catalog" />
         <section className="mx-0 xl:mx-40 px-4 xl:px-0 mb-20">
             <header className="text-2xl border-b mb-16 mt-40 text-center">
                 Catalog
@@ -35,26 +34,21 @@ const CasesPage: React.FC<PageProps<DataProps>> = ({
                         to={`/case/${caseDevice.case.name}`}
                         key={`case-${caseDevice.case.id}`}
                     >
-                        <LazyLoad height={300}>
-                            <Image
-                                cloudName={process.env.GATSBY_CLOUDINARY_NAME}
-                                publicId={caseDevice.image}
-                                secure="true"
-                                dpr="auto"
-                                responsive
-                                className="mx-auto"
-                            >
-                                <Transformation
-                                    quality="auto"
-                                    fetchFormat="auto"
-                                />
-                                <Transformation
-                                    width="800"
-                                    height="800"
-                                    crop="fill"
-                                />
-                            </Image>
-                        </LazyLoad>
+                        <Image
+                            cloudName={process.env.GATSBY_CLOUDINARY_NAME}
+                            publicId={caseDevice.image}
+                            secure="true"
+                            dpr="auto"
+                            responsive
+                            className="mx-auto"
+                        >
+                            <Transformation quality="auto" fetchFormat="auto" />
+                            <Transformation
+                                width="800"
+                                height="800"
+                                crop="fill"
+                            />
+                        </Image>
                         <span className="px-6 break-words block underline">
                             {caseDevice.case.name}
                         </span>
@@ -81,4 +75,4 @@ export const query = graphql`
     }
 `;
 
-export default CasesPage;
+export default CatalogPage;
