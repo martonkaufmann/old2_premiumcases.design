@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { PageProps, Link, graphql } from 'gatsby';
-import { Image, Transformation } from 'cloudinary-react';
-import { Cloudinary } from 'cloudinary-core';
+import slugify from 'slugify';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import { cloudinaryResponsiveImage } from './../utils/image';
 
 type DataProps = {
     hasura: {
@@ -34,10 +34,6 @@ type DataProps = {
 };
 
 const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
-    const cloudinary = new Cloudinary({
-        cloud_name: process.env.GATSBY_CLOUDINARY_NAME,
-    });
-
     const [selectedDeviceId, setSelectedDeviceId] = useState(
         data.hasura.cases_by_pk.case_devices[0].device.id,
     );
@@ -45,12 +41,7 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
         caseDevice => caseDevice.device.id === selectedDeviceId,
     );
     const casePrice = (data.hasura.cases_by_pk.price / 100).toFixed(2);
-    const caseImageSource = cloudinary.url(caseDevice.image, {
-        quality: 'auto',
-        fetchFormat: 'auto',
-        secure: true,
-        responsive: true,
-        dpr: 'auto',
+    const caseImageSource = cloudinaryResponsiveImage(caseDevice.image, {
         width: 800,
         height: 800,
         crop: 'fill',
@@ -73,7 +64,7 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
             />
             <section className="flex flex-col lg:flex-row xl:mx-40 px-4 xl:px-0">
                 <section className="w-full">
-                    <img src={caseImageSource} />
+                    <img alt={caseDevice.device.name} src={caseImageSource} />
                 </section>
                 <aside className="mt-16">
                     <header className="text-2xl font-bold mb-2">
@@ -129,7 +120,9 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
                         data-item-custom1-options={data.hasura.cases_by_pk.case_devices
                             .map(({ device }) => device.name)
                             .join('|')}
-                        data-item-url={`${process.env.GATSBY_APP_URL}/case/${data.hasura.cases_by_pk.name}`}
+                        data-item-url={`${
+                            process.env.GATSBY_APP_URL
+                        }/case/${slugify(data.hasura.cases_by_pk.name)}`}
                     >
                         Add to cart - ${casePrice}
                     </button>
@@ -142,28 +135,18 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
                 <section className="flex overflow-auto lg:grid lg:grid-cols-4 lg:row-gap-4">
                     {data.hasura.devices_by_pk.cases_devices.map(caseDevice => (
                         <Link
-                            to={`/case/${caseDevice.case.name}`}
+                            to={`/case/${slugify(caseDevice.case.name)}`}
                             key={`case-${caseDevice.case.id}`}
                             className="w-64 lg:w-auto flex-shrink-0"
                         >
-                            <Image
-                                cloudName={process.env.GATSBY_CLOUDINARY_NAME}
-                                publicId={caseDevice.image}
-                                secure="true"
-                                dpr="auto"
-                                responsive
-                                className="mx-auto"
-                            >
-                                <Transformation
-                                    quality="auto"
-                                    fetchFormat="auto"
-                                />
-                                <Transformation
-                                    width="800"
-                                    height="800"
-                                    crop="fill"
-                                />
-                            </Image>
+                            <img
+                                alt={caseDevice.case.name}
+                                className="lazyload mx-auto"
+                                data-src={cloudinaryResponsiveImage(
+                                    caseDevice.image,
+                                    { width: 500, height: 500, crop: 'fill' },
+                                )}
+                            />
                             <span className="px-6 break-words block underline text-sm">
                                 {caseDevice.case.name}
                             </span>

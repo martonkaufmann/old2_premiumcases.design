@@ -78,7 +78,7 @@ const Navigation: React.FC = (): ReactElement => {
                         </Link>
                     </li>
                     <li className="mx-3">
-                        <Link to="#" className="animate-underline">
+                        <Link to="/catalog" className="animate-underline">
                             Catalog
                         </Link>
                     </li>

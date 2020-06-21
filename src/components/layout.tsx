@@ -4,6 +4,7 @@ import Navigation from './navigation';
 import Footer from './footer';
 
 import './layout.css';
+import 'lazysizes';
 
 type DataProps = {
     children: React.ReactElement[];
@@ -12,7 +13,6 @@ type DataProps = {
 const Layout: React.FC<DataProps> = ({ children }): ReactElement => (
     <React.Fragment>
         <Helmet>
-            <link rel="preload" href="https://cdn.snipcart.com" />
             <link
                 href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css"
                 rel="stylesheet"
@@ -20,7 +20,7 @@ const Layout: React.FC<DataProps> = ({ children }): ReactElement => (
             <link
                 href="https://fonts.googleapis.com/css2?family=Material+Icons&family=Dancing+Script&family=Lexend+Tera&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
                 rel="stylesheet"
-            ></link>
+            />
         </Helmet>
         <Navigation />
         <main className="mt-16">{children}</main>
