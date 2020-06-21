@@ -1,8 +1,9 @@
 import React from 'react';
 import { PageProps, Link, graphql } from 'gatsby';
-import { Image, Transformation } from 'cloudinary-react';
+import slugify from 'slugify';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import { cloudinaryResponsiveImage } from './../utils/image';
 
 type DataProps = {
     hasura: {
@@ -31,24 +32,17 @@ const CatalogPage: React.FC<PageProps<DataProps>> = ({
             <section className="grid lg:grid-cols-3 row-gap-4">
                 {data.hasura.devices_by_pk.cases_devices.map(caseDevice => (
                     <Link
-                        to={`/case/${caseDevice.case.name}`}
+                        to={`/case/${slugify(caseDevice.case.name)}`}
                         key={`case-${caseDevice.case.id}`}
                     >
-                        <Image
-                            cloudName={process.env.GATSBY_CLOUDINARY_NAME}
-                            publicId={caseDevice.image}
-                            secure="true"
-                            dpr="auto"
-                            responsive
-                            className="mx-auto"
-                        >
-                            <Transformation quality="auto" fetchFormat="auto" />
-                            <Transformation
-                                width="800"
-                                height="800"
-                                crop="fill"
-                            />
-                        </Image>
+                        <img
+                            alt={caseDevice.case.name}
+                            className="lazyload mx-auto"
+                            data-src={cloudinaryResponsiveImage(
+                                caseDevice.image,
+                                { width: 500, height: 500, crop: 'fill' },
+                            )}
+                        />
                         <span className="px-6 break-words block underline">
                             {caseDevice.case.name}
                         </span>

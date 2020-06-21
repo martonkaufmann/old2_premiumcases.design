@@ -4,6 +4,8 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
+const slugify = require('slugify');
+
 exports.createPages = async ({ actions, graphql }) => {
     const { data } = await graphql(`
         query {
@@ -18,7 +20,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
     for (const c of data.hasura.cases) {
         actions.createPage({
-            path: `/case/${c.name}`,
+            path: `/case/${slugify(c.name)}`,
             component: require.resolve(`./src/templates/case.tsx`),
             context: { id: c.id },
         });
