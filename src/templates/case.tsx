@@ -50,7 +50,7 @@ const CaseTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
     return (
         <Layout>
             <SEO
-                title={data.hasura.cases_by_pk.name}
+                title={`${data.hasura.cases_by_pk.name} - iPhone Tough Case`}
                 meta={[
                     {
                         name: 'twitter:image',
