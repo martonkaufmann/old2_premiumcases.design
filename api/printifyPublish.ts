@@ -76,15 +76,15 @@ const cloudinaryUploadImage = async (
     publicId: string,
     retries: number = 5,
     retried: number = 0,
-): Promise<cloudinary.UploadApiResponse> => {
+): Promise<void> => {
     try {
-        return cloudinary.v2.uploader.upload(url, {
+        await cloudinary.v2.uploader.upload(url, {
             overwrite: false,
             public_id: publicId,
         });
     } catch (exception) {
         if (retries < retried) {
-            return cloudinaryUploadImage(url, publicId, retries, retried + 1)
+            await cloudinaryUploadImage(url, publicId, retries, retried + 1)
         }
 
         throw exception
