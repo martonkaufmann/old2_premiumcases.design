@@ -74,22 +74,11 @@ const printifyGetProduct = async (
 const cloudinaryUploadImage = async (
     url: string,
     publicId: string,
-    retries: number = 5,
-    retried: number = 0,
-): Promise<void> => {
-    try {
-        await cloudinary.v2.uploader.upload(url, {
-            overwrite: false,
-            public_id: publicId,
-        });
-    } catch (exception) {
-        if (retries < retried) {
-            await cloudinaryUploadImage(url, publicId, retries, retried + 1)
-        }
-
-        throw exception
-    }
-}
+): Promise<cloudinary.UploadApiResponse> =>
+    cloudinary.v2.uploader.upload(url, {
+        overwrite: false,
+        public_id: publicId,
+    });
 
 const hasuraSaveCase = async (
     name: string,
