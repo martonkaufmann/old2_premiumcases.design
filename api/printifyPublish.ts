@@ -138,7 +138,7 @@ export default async (request: NowRequest, response: NowResponse) => {
         api_secret: process.env.CLOUDINARY_API_SECRET,
     });
 
-    console.log('Got publish message', JSON.stringify(request.body));
+    console.log('Got publish message', request.body.resource.id);
 
     const promises: Promise<any>[] = [];
 
@@ -148,19 +148,11 @@ export default async (request: NowRequest, response: NowResponse) => {
         printifyShopId,
         printifyProductId,
     );
-    console.log(
-        'Printify product',
-        JSON.stringify(printifyGetProductResponse.data),
-    );
     const printifyProductArtworkId: string =
         printifyGetProductResponse.data.print_areas[0].placeholders[0].images[0]
             .id;
     const printifyGetArtworkResponse = await pritifyGetArtwork(
         printifyProductArtworkId,
-    );
-    console.log(
-        'Printify artwork',
-        JSON.stringify(printifyGetArtworkResponse.data),
     );
     const cloudinaryProductArtworkPublicId = generateCloudinaryPublicId(
         printifyGetArtworkResponse.data.preview_url,
@@ -170,10 +162,6 @@ export default async (request: NowRequest, response: NowResponse) => {
         printifyGetProductResponse.data.title,
         printifyGetProductResponse.data.variants[0].price,
         cloudinaryProductArtworkPublicId,
-    );
-    console.log(
-        'Hasura case save response',
-        JSON.stringify(hasuraSaveCaseResponse.data),
     );
     const hasuraCaseId: number =
         hasuraSaveCaseResponse.data.data.insert_cases_one.id;
