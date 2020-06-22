@@ -186,7 +186,6 @@ export default async (request: NowRequest, response: NowResponse) => {
                     printifyVariantImage.src,
                 );
 
-                console.log("Case image", cloudinaryVariantImagePublicId, printifyVariantImage.src)
                 promises.push(
                     cloudinaryUploadImage(
                         printifyVariantImage.src,
