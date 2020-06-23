@@ -21,6 +21,7 @@ const Layout: React.FC<DataProps> = ({ children }): ReactElement => (
                 href="https://fonts.googleapis.com/css2?family=Material+Icons&family=Dancing+Script&family=Lexend+Tera&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
                 rel="stylesheet"
             />
+            <meta name="p:domain_verify" content="17b9560087fe53bf637eec7223a3d6d2"/>
         </Helmet>
         <Navigation />
         <main className="mt-16">{children}</main>
