@@ -178,7 +178,7 @@ export const query = graphql`
             }
 
             devices_by_pk(id: 2) {
-                cases_devices(limit: 16) {
+                cases_devices(limit: 16, order_by: {id: desc}) {
                     image
                     case {
                         id

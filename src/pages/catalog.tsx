@@ -57,7 +57,7 @@ export const query = graphql`
     query {
         hasura {
             devices_by_pk(id: 2) {
-                cases_devices {
+                cases_devices(order_by: {id: desc}) {
                     image
                     case {
                         id
