@@ -165,14 +165,14 @@ const IndexPage: React.FC<PageProps<DataProps>> = ({
 export const query = graphql`
     query {
         hasura {
-            cases(limit: 24) {
+            cases(limit: 24, order_by: {id: desc}) {
                 id
                 name
                 artwork
             }
 
             devices_by_pk(id: 2) {
-                cases_devices(offset: 20, limit: 16) {
+                cases_devices(offset: 20, limit: 16, order_by: {id: desc}) {
                     image
                     case {
                         id
